@@ -70,6 +70,12 @@ app.get('/api/persons', (req, res) => {
   res.json(persons)
 })
 
+// info route
+app.get('/info', (req, res) => {
+  const date = Date()
+  res.send(`<p>Phonebook has info for ${persons.length} people<br>${date}</p>`)
+})
+
 const generateId = () => {
   const maxId = notes.length > 0
     ? Math.max(...notes.map(n => n.id))
