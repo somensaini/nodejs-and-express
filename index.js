@@ -62,12 +62,21 @@ app.get('/api/notes/:id', (request, response) => {
   } else {
     response.status(404).end()
   }
-  response.json(note)
 })
 
 // api/persons route
 app.get('/api/persons', (req, res) => {
   res.json(persons)
+})
+
+app.get('/api/persons/:id', (req, res) => {
+  const id = Number(req.params.id)
+  const person = persons.find(person => person.id === id)
+  if (person){
+    res.json(person)
+  } else {
+    res.status(404).end()
+  }
 })
 
 // info route
