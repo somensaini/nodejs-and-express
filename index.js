@@ -116,15 +116,15 @@ app.post('/api/notes', (request, response) => {
 app.post('/api/persons', (req, res) => {
   const body = req.body
 
-  if (!body.content) {
+  if (!body.name) {
     return res.status(400).json({ 
       error: 'content missing' 
     })
   }
 
   const person = {
-    content: body.content,
-    important: body.important || false,
+    name: body.name,
+    number: body.number,
     id: generateId(),
   }
 
