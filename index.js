@@ -116,12 +116,20 @@ app.post('/api/notes', (request, response) => {
 app.post('/api/persons', (req, res) => {
   const body = req.body
 
-  if (!body.name) {
+  if (!body.number || !body.name) {
     return res.status(400).json({ 
       error: 'content missing' 
     })
   }
 
+  const personCheck = persons.find(person => person.name === body.name)
+
+  if (personCheck){
+       return res.status(400).json({
+        error: 'name must be unique'
+       })
+    }
+  
   const person = {
     name: body.name,
     number: body.number,
