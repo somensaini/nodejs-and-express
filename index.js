@@ -92,6 +92,7 @@ const generateId = () => {
   return maxId + 1
 }
 
+// post
 app.post('/api/notes', (request, response) => {
   const body = request.body
 
@@ -110,6 +111,25 @@ app.post('/api/notes', (request, response) => {
   notes = notes.concat(note)
 
   response.json(note)
+})
+
+app.post('/api/persons', (req, res) => {
+  const body = req.body
+
+  if (!body.content) {
+    return res.status(400).json({ 
+      error: 'content missing' 
+    })
+  }
+
+  const person = {
+    content: body.content,
+    important: body.important || false,
+    id: generateId(),
+  }
+
+  persons = persons.concat(person)
+  res.json(person)
 })
 
 // delete
